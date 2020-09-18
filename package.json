@@ -2,6 +2,18 @@
   "name": "example-template-app",
   "version": "0.1.0",
   "private": true,
+  "description": "Example code: spautz's opinionated template for a nontrivial React app",
+  "license": "MIT",
+  "homepage": "https://github.com/spautz/example-template-app#readme",
+  "bugs": "https://github.com/spautz/example-template-app/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spautz/example-template-app.git"
+  },
+  "author": {
+    "name": "Steven Pautz",
+    "url": "https://stevenpautz.com/"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
