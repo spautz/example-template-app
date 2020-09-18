@@ -35,11 +35,7 @@ fi
 # Reset everything inside the repo
 
 run_command "rm -rf
-  $HOMEDIR/.gradle/caches/
-  $HOMEDIR/.gradle/daemon/
   $TMPDIR/react-*
-  $TMPDIR/react-native-packager-cache-*
-  $TMPDIR/metro-bundler-cache-*;
   .yarn
   build/
   coverage/

@@ -5,6 +5,10 @@ module.exports = {
   testEnvironment: 'node',
 
   collectCoverage: true,
-  coveragePathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/tests/'],
-  coverageReporters: ['json', 'html'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/(index|serviceWorker|setupTests).*',
+    '!src/**/*.(ignored|stories|test).{js,jsx,ts,tsx}',
+  ],
+  coverageReporters: ['json', 'html', 'lcov'],
 };

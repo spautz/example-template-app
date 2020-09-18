@@ -2,8 +2,7 @@
   "name": "example-template-app",
   "version": "0.1.0",
   "private": true,
-  "description": "Example code: spautz's opinionated template for a nontrivial React app",
-  "license": "MIT",
+  "description": "Example code: A personal, opinionated template for a nontrivial React app",
   "homepage": "https://github.com/spautz/example-template-app#readme",
   "bugs": "https://github.com/spautz/example-template-app/issues",
   "repository": {
@@ -20,72 +19,59 @@
     "pretest": "yarn run test:clean",
     "____ INTEGRATION ___________________________________________________": "",
     "clean": "yarn run build:clean && yarn run storybook:clean && yarn run test:clean && rimraf node_modules/.cache/",
-    "ci": "yarn run clean && yarn run validate && yarn run test:report",
-    "test": "yarn run test:nowatch",
-    "checkup": "yarn run format:validate && yarn run types && yarn run lint",
+    "test": "yarn run test:watch",
     "dev": "yarn run format && yarn run types && yarn run lint",
-    "validate": "yarn run clean && yarn run checkup && yarn run test && yarn run build && yarn run build-storybook",
-    "all": "yarn run clean && yarn run dev && yarn run test && yarn run build && yarn run build-storybook",
+    "dev:readonly": "yarn run format:validate && yarn run types && yarn run lint",
+    "all": "yarn run clean && yarn run dev && yarn run test:nowatch && yarn run build && yarn run build-storybook",
+    "all:readonly": "yarn run clean && yarn run dev:readonly && yarn run test:nowatch && yarn run build && yarn run build-storybook",
+    "ci": "yarn run clean && yarn run dev:readonly && yarn run test:report && yarn run build",
     "____ INDIVIDUAL COMMANDS ___________________________________________": "",
-    "build": "react-scripts build",
+    "build": "cross-env PUBLIC_URL=. react-scripts build",
     "build:clean": "rimraf build/",
     "format": "prettier --write .",
     "format:validate": "prettier --list-different .",
     "lint": "eslint . --max-warnings 0",
-    "start": "react-scripts start",
+    "start": "cross-env PUBLIC_URL=. react-scripts start",
     "storybook": "start-storybook -p 6006 -s public",
     "storybook:clean": "rimraf storybook-static/",
     "build-storybook": "build-storybook -s public",
     "test:clean": "rimraf coverage/",
-    "test:report": "cross-env CI=true react-scripts test --coverage --coverageReporters=text-lcov | coveralls",
+    "test:report": "cross-env CI=true react-scripts test --coverage && coveralls < coverage/lcov.info",
     "test:watch": "react-scripts test --watchAll=true",
-    "test:nowatch": "react-scripts test --coverage --watchAll=false",
+    "test:nowatch": "react-scripts test --watchAll=false --coverage",
     "types": "tsc --noEmit --p tsconfig.json"
   },
   "dependencies": {
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-is": "^16.13.1"
+    "react-is": "16.13.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@storybook/addon-actions": "^6.0.21",
-    "@storybook/addon-essentials": "^6.0.21",
-    "@storybook/addon-links": "^6.0.21",
-    "@storybook/node-logger": "^6.0.21",
-    "@storybook/preset-create-react-app": "^3.1.4",
-    "@storybook/react": "^6.0.21",
+    "@babel/core": "7.11.6",
+    "@storybook/addon-actions": "6.0.21",
+    "@storybook/addon-essentials": "6.0.21",
+    "@storybook/addon-links": "6.0.21",
+    "@storybook/node-logger": "6.0.21",
+    "@storybook/preset-create-react-app": "3.1.4",
+    "@storybook/react": "6.0.21",
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "11.0.4",
     "@testing-library/user-event": "12.1.5",
-    "@types/jest": "^26.0.14",
-    "@types/node": "^14.11.1",
-    "@types/react": "^16.9.49",
-    "@types/react-dom": "^16.9.8",
-    "@types/testing-library__dom": "7.5.0",
+    "@types/jest": "26.0.14",
+    "@types/node": "14.11.1",
+    "@types/react": "16.9.49",
+    "@types/react-dom": "16.9.8",
     "@typescript-eslint/eslint-plugin": "4.1.1",
     "@typescript-eslint/parser": "4.1.1",
-    "babel-loader": "^8.1.0",
-    "coveralls": "^3.1.0",
-    "cross-env": "^7.0.2",
+    "babel-loader": "8.1.0",
+    "coveralls": "3.1.0",
+    "cross-env": "7.0.2",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-react": "7.20.6",
     "prettier": "2.1.2",
     "react-scripts": "3.4.3",
-    "storybook": "^6.0.21",
-    "ts-jest": "^26.3.0",
-    "typescript": "^4.0.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "yarn run checkup"
-    }
-  },
-  "lint-staged": {
-    "**/*.{css,html,js,jsx,json,less,md,scss,ts,tsx}": [
-      "prettier --write"
-    ]
+    "ts-jest": "26.3.0",
+    "typescript": "4.0.2"
   },
   "browserslist": {
     "production": [
@@ -97,6 +83,24 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/(index|serviceWorker|setupTests).*",
+      "!src/**/*.(ignored|stories|test).{js,jsx,ts,tsx}"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run dev:readonly"
+    }
+  },
+  "lint-staged": {
+    "**/*.{css,html,js,jsx,json,less,md,scss,ts,tsx}": [
+      "prettier --write"
     ]
   }
 }
