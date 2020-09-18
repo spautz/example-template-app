@@ -14,22 +14,76 @@
     "name": "Steven Pautz",
     "url": "https://stevenpautz.com/"
   },
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
-  },
   "scripts": {
-    "start": "react-scripts start",
+    "____ LIFECYCLE HOOKS _______________________________________________": "",
+    "prebuild": "yarn run build:clean",
+    "pretest": "yarn run test:clean",
+    "____ INTEGRATION ___________________________________________________": "",
+    "clean": "yarn run build:clean && yarn run storybook:clean && yarn run test:clean && rimraf node_modules/.cache/",
+    "ci": "yarn run clean && yarn run validate && yarn run test:report",
+    "test": "yarn run test:nowatch",
+    "checkup": "yarn run format:validate && yarn run types && yarn run lint",
+    "dev": "yarn run format && yarn run types && yarn run lint",
+    "validate": "yarn run clean && yarn run checkup && yarn run test && yarn run build && yarn run build-storybook",
+    "all": "yarn run clean && yarn run dev && yarn run test && yarn run build && yarn run build-storybook",
+    "____ INDIVIDUAL COMMANDS ___________________________________________": "",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build:clean": "rimraf build/",
+    "format": "prettier --write .",
+    "format:validate": "prettier --list-different .",
+    "lint": "eslint . --max-warnings 0",
+    "start": "react-scripts start",
+    "storybook": "start-storybook -p 6006 -s public",
+    "storybook:clean": "rimraf storybook-static/",
+    "build-storybook": "build-storybook -s public",
+    "test:clean": "rimraf coverage/",
+    "test:report": "react-scripts test --coverage --coverageReporters=text-lcov | coveralls",
+    "test:watch": "react-scripts test --watchAll=true",
+    "test:nowatch": "react-scripts test --coverage --watchAll=false",
+    "types": "tsc --noEmit --p tsconfig.json"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-is": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-essentials": "^6.0.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/node-logger": "^6.0.21",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/react": "^6.0.21",
+    "@testing-library/jest-dom": "5.11.4",
+    "@testing-library/react": "11.0.4",
+    "@testing-library/user-event": "12.1.5",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.11.1",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "@types/testing-library__dom": "7.5.0",
+    "@typescript-eslint/eslint-plugin": "4.1.1",
+    "@typescript-eslint/parser": "4.1.1",
+    "babel-loader": "^8.1.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-react": "7.20.6",
+    "prettier": "2.1.2",
+    "react-scripts": "3.4.3",
+    "storybook": "^6.0.21",
+    "ts-jest": "^26.3.0",
+    "typescript": "^4.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run checkup"
+    }
+  },
+  "lint-staged": {
+    "**/*.{css,html,js,jsx,json,less,md,scss,ts,tsx}": [
+      "prettier --write"
+    ]
   },
   "browserslist": {
     "production": [

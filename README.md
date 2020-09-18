@@ -1,2 +1,3 @@
-# example-template-app
-Example code: spautz's opinionated template for a nontrivial React app
+# Example Template: React App
+
+This is my opinionated template for how a nontrivial React app should be organized and configured.

@@ -1,33 +1,38 @@
 {
   "compilerOptions": {
-    /* Basic Options */
+    /* Project Options */
     "target": "ES2019",
     "module": "esnext",
     "lib": ["dom", "ES2019"],
-    "allowJs": true,
-    "declaration": true,
     "jsx": "react",
+    "allowJs": false,
+    "declaration": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "sourceMap": true,
     "removeComments": false,
-    /* Strict Type-Checking Options */
+    /* Strict Checks */
     "strict": true,
     "noImplicitAny": true,
+    "noImplicitThis": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
-    "noImplicitThis": true,
     "alwaysStrict": true,
-    /* Additional Checks */
+    /* Module Resolution */
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    /* Linter Checks */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    /* Module Resolution Options */
-    "moduleResolution": "node",
-    "esModuleInterop": true,
     /* Advanced Options */
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]
