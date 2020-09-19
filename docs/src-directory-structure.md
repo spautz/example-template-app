@@ -16,7 +16,7 @@ In "by feature", ...
 
 "By feature" scales better, but
 
-#### 
+####
 
 - Ultimate goal is a balance between touchpoint management and shared/unique code
 

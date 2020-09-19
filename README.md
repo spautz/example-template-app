@@ -2,11 +2,11 @@
 
 This is my personal, opinionated template for how a nontrivial React app should be organized and configured.
 
+_This template is currently in progress._
+
 [![build status](https://img.shields.io/travis/com/spautz/example-template-app.svg)](https://travis-ci.com/spautz/example-template-app)
 [![dependencies status](https://img.shields.io/david/spautz/example-template-app.svg)](https://david-dm.org/spautz/example-template-app)
 [![test coverage](https://img.shields.io/coveralls/github/spautz/example-template-app.svg)](https://coveralls.io/github/spautz/example-template-app)
-
-_This template is currently in progress._
 
 ## New project setup
 
