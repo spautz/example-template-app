@@ -14,10 +14,17 @@ _This template is currently in progress._
 2. `./scripts/prepare-new-app.sh` to remove files that the app doesn't need
 3. Find/replace occurrences of `"spautz"` and `"example-template-app"` to match the new repository
 
-## Yarn scripts
+## Commands
 
-Most standard commands and scripts are available: `yarn build`, `yarn clean`, `yarn test`, `yarn start`, `yarn storybook`, etc.
-See [package.json](./package.json) for details.
+#### General setup
+
+This is built on top of [react-scripts / create-react-app](https://create-react-app.dev/).
+Running `yarn install` will install everything you need.
+
+Most standard commands and scripts are available: `yarn build`, `yarn clean`, `yarn test`, `yarn start`,
+`yarn storybook`, etc. See [package.json](./package.json) for details.
+
+#### Batch scripts
 
 There are also several batch commands to run useful groups of those scripts:
 
@@ -27,10 +34,17 @@ There are also several batch commands to run useful groups of those scripts:
 - `yarn all:readonly` runs the same tools as `all`, but in read-only mode
 - `yarn test` is an alias you can switch between watch mode and no-watch mode
 
-## Bash scripts
+#### Bash scripts
 
 For more destructive operations and things outside of the repo:
 
 - `scripts/clean-everything.sh` wipes ALL caches and temporary files. This includes global caches, so other projects will be affected.
 - `scripts/build-everything.sh` runs ALL setup and build commands for the project.
 - `scripts/full-ci.sh` does some environment checks and then runs a ci script
+
+## Docs
+
+The opinions and experiences which shaped this template are written up under [`docs/`](./docs).
+
+- [Scripts and commands](./docs/scripts-and-commands.md)
+- [`src` directory structure](./docs/src-directory-structure.md)
