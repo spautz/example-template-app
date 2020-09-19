@@ -33,4 +33,4 @@ For more destructive operations and things outside of the repo:
 
 - `scripts/clean-everything.sh` wipes ALL caches and temporary files. This includes global caches, so other projects will be affected.
 - `scripts/build-everything.sh` runs ALL setup and build commands for the project.
-- `scripts/full-ci.sh` does some environment setup and then runs a ci script
+- `scripts/full-ci.sh` does some environment checks and then runs a ci script

@@ -13,6 +13,10 @@
     "name": "Steven Pautz",
     "url": "https://stevenpautz.com/"
   },
+  "engines": {
+    "node": ">=10 <=14",
+    "yarn": "1.*"
+  },
   "scripts": {
     "____ LIFECYCLE HOOKS _______________________________________________": "",
     "prebuild": "yarn run build:clean",

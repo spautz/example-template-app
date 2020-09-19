@@ -9,28 +9,24 @@ cd "$(dirname "$0")/.."
 source scripts/helpers.sh
 
 ###################################################################################################
-# Validate everything
+# Check versions of Node, Yarn, and any other tools required
 
-NODE_ACTUAL=$(echo $(node --version) | tr -d '[v:space:]')
-NODE_DESIRED=$(cat .nvmrc)
+# If "engines" is set in package.json, validate against its values
+HAS_ENGINES=$(get_json_value package.json "engines")
+if [ $HAS_ENGINES ]; then
+  run_npm_command check-node-version --package --print
 
+else
+  # Validate Node version in .nvmrc
+  NODE_ACTUAL=$(echo $(node --version) | tr -d '[v:space:]')
+  NODE_DESIRED=$(cat .nvmrc)
 
-echo "Node version: $NODE_ACTUAL"
-if [ $NODE_DESIRED ] && [ $NODE_ACTUAL != $NODE_DESIRED ]; then
-  echo "Node version desired: $NODE_DESIRED"
-  exit 1
+  echo "Node version: $NODE_ACTUAL"
+  if [ $NODE_DESIRED ] && [ $NODE_ACTUAL != $NODE_DESIRED ]; then
+    echo "Node version desired: $NODE_DESIRED"
+    exit 1
+  fi
 fi
-
-
-YARN_ACTUAL=$(yarn --version)
-YARN_DESIRED=$(get_json_value package.json "yarn")
-
-echo "Yarn version: $YARN_ACTUAL"
-if [ $YARN_DESIRED ] && [ $YARN_ACTUAL != $YARN_DESIRED ]; then
-  echo "Yarn version desired: $YARN_DESIRED"
-  exit 1
-fi
-
 
 ###################################################################################################
 
