@@ -13,13 +13,14 @@ The scripts in `package.json` need to support several scenarios when writing cod
 The scripts here try to address those different scenarios by segmenting the scripts into two groups:
 
 - "Individual" commands run a single, targeted command -- like `eslint` or `jest` or `webpack` -- and nothing more.
-- "Integration" or "batch" commands run a series of related commands -- like `eslint` then `jest` then `webpack` -- and nothing more.
+- "Integration" or "batch" commands run a series of related commands -- like `eslint` then `jest` then `webpack`.
 
-"Integration" scripts are composed only of "individual" commands -- they do no work of their own -- so if something
-inside them fails there'll be a smaller, more targeted command you can rerun.
+"Integration" commands are composed only of "individual" commands -- they do no work of their own -- so if something
+inside them fails there'll be a smaller, more targeted command you can rerun. This supports the "trying to fix some
+issue" case.
 
-They also offer a layer of abstraction for commands with multiple variants, like tests or builds which could be run
-either as a single "run and stop" step or as a lingering service that reruns as files are changed.
+Integration commands also offer a layer of abstraction for commands with multiple variants: scripts which can be run
+either as a single "run and stop" step or as a lingering service that reruns as files are changed, like `test` or `watch`.
 
 ## How it Looks
 
@@ -35,7 +36,7 @@ either as a single "run and stop" step or as a lingering service that reruns as 
 
 `yarn types`: typescript only
 
-`yarn test:watch`: keep rerunning tests until they're fixed
+`yarn test:watch`: keep running and rerunning tests until they're fixed
 
 > "I want confidence that everything is good"
 
@@ -50,7 +51,7 @@ I often see test command setups that look like this:
 ```json
 {
   "test": "jest --watch",
-  "test:coverage": "CI=true jest --coverage",
+  "test:coverage": "jest --coverage",
   "test:nowatch": "jest --watchAll=false"
 }
 ```
@@ -71,8 +72,8 @@ it's making sure I didn't add a typing error. Once it's working I just switch it
 #### `clean` commands
 
 `clean` commands get divided up the same way as everything else -- so, any command which creates something
-(`build`, `test` (with coverage), `build-storybook`, etc) has its pair: `build:clean` / `test:clean` / `storybook:clean`
-/ etc. Lifecycle scripts can generally run those automatically.
+(`build`, `test` (with coverage), `build-storybook`, etc) has its pair: `build:clean`, `test:clean`, `storybook:clean`,
+etc. Lifecycle scripts can generally run those automatically.
 
 Splitting it into separate commands avoids side effects when running individual commands. Here's a common setup:
 
@@ -98,10 +99,10 @@ Initially this works fine, but as the project expands additional scripts will be
 
 And now the `build` step erases the code coverage report. Oops.
 
-This isn't really a big deal -- maybe it'd cause a CI failure or a moment of frustration for a single dev -- but
-in fixing it you either tear down the unified `clean` command, or duplicate its pieces into both the `clean` and
-`build` commands, or split each clean step into its own piece (one for `build:clean`, one for `test:clean`) and have
-both `clean` and `build` use that. It's easiest to just start with separate steps.
+This isn't really a big deal -- maybe it'd cause a CI failure or a moment of frustration for somebody -- but while
+fixing it you either tear down the unified `clean` command, or duplicate its pieces into both the `clean` and `build`
+commands, or split each clean step into its own piece (one for `build:clean`, one for `test:clean`) and have both
+`clean` and `build` use that. It's easiest to just start with separate steps.
 
 ## Criticisms and Concerns
 
