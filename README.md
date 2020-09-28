@@ -22,15 +22,15 @@ This is built on top of [react-scripts / create-react-app](https://create-react-
 Running `yarn install` will install everything you need.
 
 Most standard commands and scripts are available: `yarn build`, `yarn clean`, `yarn test`, `yarn start`,
-`yarn storybook`, etc. See [package.json](./package.json) for details.
+`yarn storybook`, etc. See [package.json](./package.json) for the full list.
 
-#### Batch scripts
+#### Batch commands
 
 There are also several batch commands to run useful groups of those scripts:
 
-- `yarn dev` runs some quick "check my code" tools: prettier, eslint, typescript
+- `yarn dev` runs some quick "check the code" tools: prettier, eslint, typescript
 - `yarn dev:readonly` runs the same tools as `dev`, but in read-only mode
-- `yarn all` runs _all_ the "check my code" tools, including tests and builds
+- `yarn all` runs _all_ the "check the code + app" tools, including tests and builds
 - `yarn all:readonly` runs the same tools as `all`, but in read-only mode
 - `yarn test` is an alias you can switch between watch mode and no-watch mode
 
@@ -47,4 +47,4 @@ For more destructive operations and things outside of the repo:
 The opinions and experiences which shaped this template are written up under [`docs/`](./docs).
 
 - [Scripts and commands](./docs/scripts-and-commands.md)
-- [`src` directory structure](./docs/src-directory-structure.md)
+- [`src` directory structure](./docs/src-directory-structure.md) (draft in progress)

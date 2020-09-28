@@ -1,7 +1,8 @@
 import React from 'react';
-import { Story } from '@storybook/react';
+import type { Story } from '@storybook/react';
 
-import AppRoot, { AppRootProps } from './AppRoot';
+import AppRoot from './AppRoot';
+import type { AppRootProps } from './AppRoot';
 
 export default {
   title: 'AppRoot',

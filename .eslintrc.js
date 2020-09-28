@@ -1,19 +1,18 @@
 /* eslint-env node */
 
+const rules = {
+  'react/jsx-uses-react': 'error',
+  'react/jsx-uses-vars': 'error',
+  '@typescript-eslint/no-empty-interface': 'off',
+};
+
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react'],
-  extends: [
-    'eslint:recommended',
-    'prettier/@typescript-eslint',
-    // 'react-app',
-  ],
+  extends: ['eslint:recommended', 'prettier/@typescript-eslint'],
 
-  rules: {
-    'react/jsx-uses-react': 'error',
-    'react/jsx-uses-vars': 'error',
-  },
+  rules,
 
   overrides: [
     {
@@ -24,12 +23,13 @@ module.exports = {
     },
     {
       files: ['**/*.ts', '**/*.tsx'],
+      // Add typescript rules for typescript files only
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
         'prettier/@typescript-eslint',
-        // 'react-app',
       ],
+      rules,
     },
     {
       files: ['**/*.test.*', '**/tests/*.*'],
