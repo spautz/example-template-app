@@ -47,4 +47,4 @@ For more destructive operations and things outside of the repo:
 The opinions and experiences which shaped this template are written up under [`docs/`](./docs).
 
 - [Scripts and commands](./docs/scripts-and-commands.md)
-- [`src` directory structure](./docs/src-directory-structure.md) (draft in progress)
+- [`src` directory structure](./docs/src-directory-structure.md) (long)
